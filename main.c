@@ -5,11 +5,11 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <tchar.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <string.h>
-#include <stdlib.h>
 
 int _tmain()
 {
@@ -29,8 +29,14 @@ int _tmain()
 
             if (!S_ISDIR(st.st_mode)) // not a directory
             {
-                _TCHAR* pos = _tcschr(entry->d_name, _T('-')) + 1; // filename without the file number
-                _tprintf(_T("%s -> %s\n"), entry->d_name, pos); // print name
+                _TCHAR* fName = entry->d_name;
+                _TCHAR* pos = _tcschr(fName, _T('-')); // filename without the file number
+
+                if (pos == NULL) // filename contains no dash
+                    continue;
+
+                // print name
+                _tprintf(_T("%s -> %s\n"), fName, pos + 1);
 
                 // rename file
                 _trename(entry->d_name, pos);

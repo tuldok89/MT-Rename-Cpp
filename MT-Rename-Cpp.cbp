@@ -23,18 +23,22 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-g" />
+					<Add option="-ggdb" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wextra" />
 			<Add option="-Wall" />
-			<Add option="-fexceptions -std=gnu99 -DUNICODE -D_UNICODE" />
+			<Add option="-fexceptions -std=gnu99" />
+			<Add option="-DUNICODE" />
+			<Add option="-D_UNICODE" />
+			<Add option="-DN_USE_32BIT_TIME_T" />
 		</Compiler>
 		<Linker>
 			<Add option="-municode" />
+			<Add option="-static-libgcc" />
 		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
