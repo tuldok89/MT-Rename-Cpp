@@ -11,7 +11,7 @@
 #include <sys/stat.h>
 #include <string.h>
 
-int _tmain()
+int _tmain(int argc, _TCHAR* argv)
 {
     _TDIR *dir;
     struct _tdirent *entry;
@@ -39,7 +39,7 @@ int _tmain()
                 _tprintf(_T("%s -> %s\n"), fName, pos + 1);
 
                 // rename file
-                _trename(entry->d_name, pos);
+                _trename(entry->d_name, pos + 1);
             }
         }
         _tclosedir(dir);
@@ -49,10 +49,6 @@ int _tmain()
         _tperror(_T("Can't read directory"));
         return EXIT_FAILURE;
     }
-
-#ifndef NDEBUG
-    system("PAUSE");
-#endif // DEBUG
 
     return EXIT_SUCCESS;
 }
